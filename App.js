@@ -17,17 +17,17 @@ class HomeScreen extends React.Component {
   }
 }
 
-class ChatScreen extends React.Component {
+class ProfileScreen extends React.Component {
   // Nav options can be defined as a function of the screen's props:
   static navigationOptions = ({ navigation }) => ({
-    title: `Chat with ${navigation.state.params.user}`,
+    title: `${navigation.state.params.user}'s profile`,
   });
   render() {
     // The screen's current route is passed in to `props.navigation.state`:
     const { params } = this.props.navigation.state;
     return (
       <View>
-        <Text>Chat with {params.user}</Text>
+        <Text>{params.user}'s solutions and stuff</Text>
       </View>
     );
   }
@@ -35,7 +35,7 @@ class ChatScreen extends React.Component {
 
 const SimpleApp = StackNavigator({
   Home: { screen: HomeScreen },
-  Chat: { screen: ChatScreen },
+  Chat: { screen: ProfileScreen },
 });
 
 export default class App extends React.Component {
