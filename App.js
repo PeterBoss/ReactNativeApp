@@ -27,7 +27,8 @@ class ProfileScreen extends React.Component {
     const { params } = this.props.navigation.state;
     return (
       <View>
-        <Text>´${params.user}'s solutions and stuff´</Text>
+        <Text>`${params.user}'s solutions and stuff`</Text>
+
       </View>
     );
   }
