@@ -1,55 +1,53 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Text, View, Platform, TouchableOpacity, StyleSheet, Button, WebView } from 'react-native';
+import { Constants, WebBrowser } from "expo";
 import { StackNavigator } from 'react-navigation';
-import Users from './Users'
+import SolutionsView from './views/SolutionsView'
+import UserView from './views/UserView'
+import AssignmentsView from './views/AssignmentsView'
+
+const Touchable = (props) => (
+  <TouchableOpacity style={styles.button} onPress={props.onPress}>
+    <Text style={styles.buttonText}>{props.title}</Text>
+  </TouchableOpacity>)
+
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome',
-  };
+  static navigationOptions = { title: 'Home' };
   render() {
     const { navigate } = this.props.navigation;
     return (
-      
-        <Users />
-      
-    );
-  }
-}
-
-class ProfileScreen extends React.Component {
-  // Nav options can be defined as a function of the screen's props:
-  static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.user}'s profile`,
-  });
-  render() {
-    // The screen's current route is passed in to `props.navigation.state`:
-    const { params } = this.props.navigation.state;
-    return (
-      <View>
-        <Text>`${params.user}'s solutions and stuff`</Text>
+      <View >
+        <Touchable onPress={() => navigate('SolutionsView')} title="User's solved assignments" />
+        <Touchable onPress={() => navigate('UserView')} title="User's information" />
+        <Touchable onPress={() => navigate('AssignmentsView')} title="Appropriate Assignments" />
 
       </View>
-    );
+    )
   }
 }
 
-const SimpleApp = StackNavigator({
+export default App = () => <RouteStack style={{ marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight / 2 }} />
+
+const RouteStack = StackNavigator({
   Home: { screen: HomeScreen },
-  Chat: { screen: ProfileScreen },
-});
+  SolutionsView: { screen: SolutionsView },
+  UserView: { screen: UserView },
+  AssignmentsView: { screen: AssignmentsView },
 
-export default class App extends React.Component {
-  render() {
-    return <SimpleApp />;
-  }
-}
+
+});
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  button: {
+    margin: 3,
     alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: '#2196F3'
+  },
+  buttonText: {
+    padding: 7,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: 'white'
   }
-});
+})
